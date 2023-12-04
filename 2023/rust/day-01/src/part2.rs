@@ -44,7 +44,7 @@ pub fn process(input: &str) -> String {
     ];
 
     let mut result = 0;
-    let lines: Vec<_> = input.split("\n").collect();
+    let lines: Vec<_> = input.split('\n').collect();
     let digit: Vec<Vec<u32>> = lines
         .iter()
         .filter_map(|x| {
@@ -52,22 +52,20 @@ pub fn process(input: &str) -> String {
             for i in 0..x.len() {
                 let mut boolean = false;
                 for a in string_to_value.iter() {
-                    if !boolean {
-                        if x[i..].starts_with(&a.letter) {
-                            temp.push(a.value);
-                            boolean = true;
-                        }
+                    if !boolean && x[i..].starts_with(&a.letter) {
+                        temp.push(a.value);
+                        boolean = true;
                     }
                 }
                 if !boolean {
                     let first_letter = x.chars().nth(i).unwrap_or('a');
-                    if first_letter.is_digit(10) {
+                    if first_letter.is_ascii_digit() {
                         temp.push(first_letter.to_digit(10).unwrap());
                     }
                 }
             }
 
-            return Some(temp);
+            Some(temp)
         })
         .collect();
 
@@ -87,7 +85,7 @@ pub fn process(input: &str) -> String {
     values_of_each_lines
         .iter()
         .for_each(|number| result += number);
-    return result.to_string();
+    result.to_string()
 }
 
 #[cfg(test)]

@@ -1,6 +1,6 @@
 pub fn process(input: &str) -> String {
     let mut result = 0;
-    let lines: Vec<_> = input.split("\n").collect();
+    let lines: Vec<_> = input.split('\n').collect();
     let digit: Vec<Vec<u32>> = lines
         .iter()
         .map(|x| x.chars().filter_map(|d| d.to_digit(10)).collect())
@@ -22,7 +22,7 @@ pub fn process(input: &str) -> String {
     values_of_each_lines
         .iter()
         .for_each(|number| result += number);
-    return result.to_string();
+    result.to_string()
 }
 
 #[cfg(test)]
